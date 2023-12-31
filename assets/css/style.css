@@ -13,13 +13,19 @@ body{
     font-size: 24px;
 }
 
-.container{
+.top_container, .container{
+    min-width: 800px;
     width: 60%;
     margin: auto;
+}
+
+.top_container, .card{
+    margin-bottom: 1rem;
     padding: 1rem;
     background-color: white;
-    margin-bottom: 1rem;
 }
+
+
 
 h1{
     color: white;

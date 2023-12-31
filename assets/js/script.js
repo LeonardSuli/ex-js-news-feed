@@ -1,8 +1,10 @@
 
 
-//Step 1: struttura dei dati
+// Step 1: struttura dei dati
+// Partendo dai dati forniti crea le strutture dati necessarie sfruttando array 
+// e oggetti facendo attenzione agli attributi che caratterizzano ciascuna news.
 
-const news = [
+const cards = [
 
     {
       id: 1,
@@ -57,4 +59,36 @@ const news = [
     }
 ];
 
-console.log(news);
+console.log(cards);
+
+// Funzione per generare la card col markup
+function generateCard(card){
+
+    const cardMarkup = `<div class="card">
+                            <h2>${card.title}</h2>
+                            <span>pubblicato da ${card.author}</span>
+                            <span>in data ${card.published}</span>
+                            <p>${card.content}</p>
+                            <img src="${card.image.url}" alt="${card.image.alt}">
+                            <div>${card.tags}</div>
+                        </div>`
+
+    return cardMarkup
+
+}
+
+// Seleziono l'elemento DOM dove aggiungo tutte le card
+const cardsEl = document.querySelector('.cards')
+
+// Ciclo la card in foreach
+cards.forEach(card => {
+
+    console.log(card);
+
+    const cardEl = generateCard(card)
+    console.log(cardEl);
+
+    // Aggiungo il markup HTML al container delle carte nel DOM
+    cardsEl.insertAdjacentHTML("beforeend", cardEl)
+
+})

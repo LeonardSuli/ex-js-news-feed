@@ -10,11 +10,15 @@
 <body>
 
     <header>
+
         <h1>News Feed</h1>
-        <div class="container flex-center">
+
+        <div class="top_container flex-center">
+
+            <!-- Select -->
             <div>
                 <label>Filtra per tags:</label>
-                <select class="form-select" aria-label="Default select example">
+                <select name="tag_type" id="tag_type">
                     <option selected>Tutti i tags</option>
                     <option value="politica">Politica</option>
                     <option value="geo">Geo</option>
@@ -23,17 +27,28 @@
                     <option value="cucina">Cucina</option>
                 </select>
             </div>
+
+            <!-- Checkbox -->
             <div>
                 <input type="checkbox" name="news_saved" id="news_saved">
                 <label for="news_saved">Solo news salvate</label>
             </div>
+
         </div>
     </header>
 
 
     <main>
-        <div class="container">fhgcjhvkòj
+        <div class="container">
+
+            <div class="cards">
+
+                <!-- Aggiungiamo le cards con JS -->
+                
+            </div>
+
         </div>
+        
     </main>
 
     <script src="./assets/js/script.js"></script>
