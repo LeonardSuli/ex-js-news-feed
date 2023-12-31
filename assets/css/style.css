@@ -7,8 +7,19 @@
     box-sizing: border-box;
 }
 
+:root{
+    --primary: rgb(2, 48, 71);
+    --geo: rgb(0, 128, 1);
+    --tech: rgb(0, 0, 128);
+    --cucina: rgb(128, 0, 128);
+    --viaggi: rgb(243, 163, 96);
+    --arte: rgb(243, 204, 1);
+    --dark: rgb(0, 0, 0);
+    --light: rgb(255, 255, 255);
+}
+
 body{
-    background-color: rgb(2, 48, 71);
+    background-color:var(--primary);
     font-family: Arial, Helvetica, sans-serif;
     font-size: 24px;
 }
@@ -21,12 +32,12 @@ body{
 
 .top_container, .card{
     margin-bottom: 1rem;
-    padding: 1rem;
-    background-color: white;
+    padding: 1.5rem;
+    background-color: var(--light);
 }
 
 h1{
-    color: white;
+    color: var(--light);
     text-align: center;
     font-size: 70px;
     margin: 2rem;
@@ -47,6 +58,37 @@ select{
 img{
     width: 100%;
 }
+
+button{
+    font-size: 24px;
+    padding: 0.75rem;
+    border-radius: 10px;
+    margin-top: 1rem;
+    margin-right: 0.5rem;
+    color: var(--light);
+    border: none;
+}
+
+.btn_geo{
+    background-color: var(--geo);
+}
+
+.btn_tech{
+    background-color: var(--tech);
+}
+
+.btn_cucina{
+    background-color: var(--cucina);
+}
+
+.btn_viaggi{
+    background-color: var(--viaggi);
+}
+
+.btn_arte{
+    background-color: var(--arte);
+}
+
 
 /* Region utility */
 

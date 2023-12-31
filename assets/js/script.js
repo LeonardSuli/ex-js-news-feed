@@ -36,7 +36,7 @@ const cards = [
       id: 3,
       title: "Viaggio culinario: alla ricerca dei sapori perduti",
       content: "Esplorazione di tradizioni culinarie dimenticate e la ricerca di sapori autentici.",
-      tags: "cucina",
+      tags: ["cucina"],
       author: "Marta Bianchi",
       published: "2023-04-20",
       image: {
@@ -65,14 +65,15 @@ const cards = [
 // Funzione per generare la card col markup
 function generateCard(card){
 
+  const tagsButtons = card.tags.map(tag => `<button class="btn_${tag}">${tag}</button>`).join('');
+
     const cardMarkup = `<div class="card">
                             <h2>${card.title}</h2>
                             <span>pubblicato da ${card.author}</span>
                             <span>in data ${card.published}</span>
                             <p>${card.content}</p>
                             <img src="./assets/img/${card.image.url}" alt="${card.image.alt}"><br>
-                            <button>${card.tags[0]}</button>
-                            <button>${card.tags[1]}</button>
+                            ${tagsButtons}
 
                         </div>`
 
@@ -88,14 +89,13 @@ const cardsEl = document.querySelector('.cards')
 // Uso il ciclo foreach per iterare le card
 cards.forEach(card => {
 
-    console.log(card);
+    // console.log(card);
 
     // Salvo in una variabile la funzione per generare la card
     const cardEl = generateCard(card)
-    console.log(cardEl);
+    // console.log(cardEl);
 
     // Aggiungo il markup HTML al container delle carte nel DOM
-    cardsEl.insertAdjacentHTML("beforeend", cardEl)
-
+    cardsEl.insertAdjacentHTML("beforeend", cardEl);
 
 })
