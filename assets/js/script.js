@@ -54,12 +54,13 @@ const cards = [
       published: "2023-05-29",
       image: {
         url: "modern-art.jpg",
-        alt: "Arte sul muro nel parcheggio bici.",
+        alt: "Arte moderna sul muro.",
       }
     }
 ];
 
-console.log(cards);
+// console.log(cards);
+
 
 // Funzione per generare la card col markup
 function generateCard(card){
@@ -69,26 +70,32 @@ function generateCard(card){
                             <span>pubblicato da ${card.author}</span>
                             <span>in data ${card.published}</span>
                             <p>${card.content}</p>
-                            <img src="${card.image.url}" alt="${card.image.alt}">
-                            <div>${card.tags}</div>
+                            <img src="./assets/img/${card.image.url}" alt="${card.image.alt}"><br>
+                            <button>${card.tags[0]}</button>
+                            <button>${card.tags[1]}</button>
+
                         </div>`
 
     return cardMarkup
 
 }
 
+
 // Seleziono l'elemento DOM dove aggiungo tutte le card
 const cardsEl = document.querySelector('.cards')
 
-// Ciclo la card in foreach
+
+// Uso il ciclo foreach per iterare le card
 cards.forEach(card => {
 
     console.log(card);
 
+    // Salvo in una variabile la funzione per generare la card
     const cardEl = generateCard(card)
     console.log(cardEl);
 
     // Aggiungo il markup HTML al container delle carte nel DOM
     cardsEl.insertAdjacentHTML("beforeend", cardEl)
+
 
 })
