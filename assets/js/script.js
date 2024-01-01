@@ -57,22 +57,28 @@ const cards = [
         alt: "Arte moderna sul muro.",
       }
     }
-];
+  ];
 
-// console.log(cards);
+  // console.log(cards);
+  
+  
+  // Funzione per generare la card col markup
+  function generateCard(card){
+    
+    // Variabile per creare bottoni ad ogni nuovo tag
+    const tagsButtons = card.tags.map(tag => `<button class="btn_${tag}">${tag}</button>`).join('');
+    
+    // Inserito data in formato italiano
+    card.published = new Date(card.published).toLocaleDateString('it-IT');
+    // console.log(card.published);
 
-
-// Funzione per generare la card col markup
-function generateCard(card){
-
-  const tagsButtons = card.tags.map(tag => `<button class="btn_${tag}">${tag}</button>`).join('');
-
+    // Creato markup della card in HTML
     const cardMarkup = `<div class="card">
                             <h2>${card.title}</h2>
-                            <span>pubblicato da ${card.author}</span>
-                            <span>in data ${card.published}</span>
-                            <p>${card.content}</p>
-                            <img src="./assets/img/${card.image.url}" alt="${card.image.alt}"><br>
+                            <span id="author">pubblicato da ${card.author}</span>
+                            <span id="published">in data ${card.published}</span>
+                            <p id="content">${card.content}</p>
+                            <img src="./assets/img/${card.image.url}" alt="${card.image.alt}">
                             ${tagsButtons}
 
                         </div>`
@@ -99,3 +105,4 @@ cards.forEach(card => {
     cardsEl.insertAdjacentHTML("beforeend", cardEl);
 
 })
+

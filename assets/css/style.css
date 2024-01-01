@@ -31,7 +31,7 @@ body{
 }
 
 .top_container, .card{
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     padding: 1.5rem;
     background-color: var(--light);
 }
@@ -87,6 +87,19 @@ button{
 
 .btn_arte{
     background-color: var(--arte);
+}
+
+#author{
+    font-weight: 700;
+    display: block;
+}
+
+#published{
+    font-size: 18px;
+}
+
+#content{
+    margin: 1rem 0;
 }
 
 
