@@ -94,10 +94,10 @@ selectEl.addEventListener('change', function(e){
   // Ottengo il valore selezionato dalla select
   const selectedTag = e.target.value;
   
-  // Filtrare le carte in base al tag selezionato
+  // Filtro le carte in base al tag selezionato
   const filteredCards = cards.filter(card => {
 
-    // Verificare se almeno un elemento dell'array di tags è uguale al tag selezionato
+    // Verifico se almeno un elemento dell'array di tags è uguale al tag selezionato
     for (let i = 0; i < card.tags.length; i++) {
       
       if (card.tags[i] === selectedTag || selectedTag === 'all') {
@@ -110,9 +110,21 @@ selectEl.addEventListener('change', function(e){
 
   console.log(filteredCards);
 
+  // Resetto la select ogni volta che cambio option
   cardsEl.innerHTML = '';
 
-  renderCards(filteredCards, cardsEl);
+  // Condizione che specifica che se un tag non ha una card restituisce un empty state
+  if(filteredCards.length === 0){
+
+    cardsEl.innerHTML = `<h2 class='empty_state'>No news available.</h2>`;
+
+  }else{
+
+    // Altrimenti restituisce la card richista
+    renderCards(filteredCards, cardsEl);
+
+  }
+
 
 });
 
