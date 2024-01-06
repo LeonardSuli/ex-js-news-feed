@@ -68,12 +68,91 @@ const cards = [
 // stampa in pagina le news del nostro feed utilizzando JavaScript.
   
 
-// Seleziono l'elemento della DOM dove aggiungo tutte le card
+// Seleziono l'elemento della DOM dove aggiungo tutte le card e la salvo in una variabile
 const cardsEl = document.querySelector('.cards');
   
 
 // Funzione che rende una lista di card dentro la DOM
 renderCards(cards, cardsEl);
+
+
+// Step 3: filtri
+// Crea l’interfaccia dei filtri utilizzando tag di input appropriati. 
+// Recupera in JavaScript i valori selezionati dall’utente da utilizzare 
+// nel codice per le logiche di filtraggio gli elementi.
+
+
+// Seleziono l'elemento select nella DOM e la salvo in una variabile
+const selectEl = document.getElementById('tag_type');
+
+
+// Aggiungo un event listener con l'evento change per la select
+selectEl.addEventListener('change', function(e){
+
+  // console.log(e.target.value);
+
+  // Ottengo il valore selezionato dalla select
+  const selectedTag = e.target.value;
+  
+  // Filtrare le carte in base al tag selezionato
+  const filteredCards = cards.filter(card => {
+
+    // Verificare se almeno un elemento dell'array di tags è uguale al tag selezionato
+    for (let i = 0; i < card.tags.length; i++) {
+      
+      if (card.tags[i] === selectedTag || selectedTag === 'all') {
+        return true;
+      }
+      
+    }
+    
+  });
+
+  console.log(filteredCards);
+
+  cardsEl.innerHTML = '';
+
+  renderCards(filteredCards, cardsEl);
+
+});
+
+
+
+
+
+
+
+const typesList = new Set(cards.flatMap(card => card.tags))
+
+console.log(typesList);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /**
