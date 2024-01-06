@@ -89,10 +89,7 @@ const selectEl = document.getElementById('tag_type');
 // Aggiungo un event listener con l'evento change per la select
 selectEl.addEventListener('change', function(e){
 
-  // console.log(e.target.value);
-
-  // Ottengo il valore selezionato dalla select
-  const selectedTag = e.target.value;
+  console.log(e.target.value);
   
   // Filtro le carte in base al tag selezionato
   const filteredCards = cards.filter(card => {
@@ -100,7 +97,7 @@ selectEl.addEventListener('change', function(e){
     // Verifico se almeno un elemento dell'array di tags è uguale al tag selezionato
     for (let i = 0; i < card.tags.length; i++) {
       
-      if (card.tags[i] === selectedTag || selectedTag === 'all') {
+      if (card.tags[i] === e.target.value || e.target.value === 'all') {
         return true;
       }
       
@@ -129,14 +126,12 @@ selectEl.addEventListener('change', function(e){
 });
 
 
-
-
-
-
-
-const typesList = new Set(cards.flatMap(card => card.tags))
+// Ottengo l'unicità dei tipi di tag
+const typesList = new Set(cards.flatMap(card => card.tags));
 
 console.log(typesList);
+
+
 
 
 
