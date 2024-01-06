@@ -4,6 +4,7 @@
 // Partendo dai dati forniti crea le strutture dati necessarie sfruttando array 
 // e oggetti facendo attenzione agli attributi che caratterizzano ciascuna news.
 
+
 const cards = [
 
     {
@@ -57,52 +58,83 @@ const cards = [
         alt: "Arte moderna sul muro.",
       }
     }
-  ];
+];
 
-  // console.log(cards);
+// console.log(cards);
   
   
-  // Funzione per generare la card col markup
-  function generateCard(card){
+// Step 2 - Stampa dei dati in pagina
+// Prendendo come riferimento il layout di esempio presente nell'HTML 
+// stampa in pagina le news del nostro feed utilizzando JavaScript.
+  
+
+// Seleziono l'elemento della DOM dove aggiungo tutte le card
+const cardsEl = document.querySelector('.cards');
+  
+
+// Funzione che rende una lista di card dentro la DOM
+renderCards(cards, cardsEl);
+
+
+/**
+ * Funzione per generare il markup della card
+ * @param {object} card L'oggetto della card
+ * @returns object
+ */
+function generateCard(card){
     
-    // Variabile per creare bottoni ad ogni nuovo tag
-    const tagsButtons = card.tags.map(tag => `<button class="btn_${tag}">${tag}</button>`).join('');
-    
-    // Inserito data in formato italiano
-    card.published = new Date(card.published).toLocaleDateString('it-IT');
-    // console.log(card.published);
+  // Inserito data in formato italiano
+  card.published = new Date(card.published).toLocaleDateString('it-IT');
+  
+  // Ciclo map per creare bottoni ad ogni nuovo tag aggiunto
+  const tagsButtons = card.tags.map(tag => 
+    `<button class="btn_${tag}">${tag}</button>`).join('');
 
-    // Creato markup della card in HTML
-    const cardMarkup = `<div class="card">
-                            <h2>${card.title}</h2>
-                            <span id="author">pubblicato da ${card.author}</span>
-                            <span id="published">in data ${card.published}</span>
-                            <p id="content">${card.content}</p>
-                            <img src="./assets/img/${card.image.url}" alt="${card.image.alt}">
-                            ${tagsButtons}
+  // Creato markup della card in HTML con il template literal
+  const cardMarkup = `<div class="card">
+                          <h2>${card.title}</h2>
+                          <span id="author">pubblicato da ${card.author}</span>
+                          <span id="published">in data ${card.published}</span>
+                          <p id="content">${card.content}</p>
+                          <img src="./assets/img/${card.image.url}" alt="${card.image.alt}">
+                          ${tagsButtons}
+                      </div>`;
+                          // <i id="icon" class="fa-solid fa-bookmark"></i>
 
-                        </div>`
-
-    return cardMarkup
-
+  return cardMarkup
+  
 }
 
 
-// Seleziono l'elemento DOM dove aggiungo tutte le card
-const cardsEl = document.querySelector('.cards')
-
-
-// Uso il ciclo foreach per iterare le card
-cards.forEach(card => {
-
+/**
+ * Rende una lista di card dentro la DOM
+ * @param {Array} cardsList Un'array dell'oggetto della card
+ * @param {Object} domElement Il node dove inseriamo le card
+ */
+function renderCards(cardsList, domElement) {
+  
+  // Uso il ciclo foreach per iterare le card
+  cardsList.forEach(card => {
+    
     // console.log(card);
-
-    // Salvo in una variabile la funzione per generare la card
-    const cardEl = generateCard(card)
+    
+    // Inserisco la funzione per generare la card col markup
+    // e la faccio iterare nel ciclo forEach
+    const cardEl = generateCard(card);
     // console.log(cardEl);
-
+    
     // Aggiungo il markup HTML al container delle carte nel DOM
-    cardsEl.insertAdjacentHTML("beforeend", cardEl);
+    domElement.insertAdjacentHTML("beforeend", cardEl); 
+    
+    })
+}
 
-})
+
+
+
+
+
+
+
+
 
