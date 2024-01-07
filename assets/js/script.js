@@ -89,7 +89,7 @@ const selectEl = document.getElementById('tag_type');
 // Aggiungo un event listener con l'evento change per la select
 selectEl.addEventListener('change', function(e){
 
-  console.log(e.target.value);
+  // console.log(e.target.value);
   
   // Filtro le carte in base al tag selezionato
   const filteredCards = cards.filter(card => {
@@ -105,13 +105,13 @@ selectEl.addEventListener('change', function(e){
     
   });
 
-  console.log(filteredCards);
+  // console.log(filteredCards);
 
   // Resetto la select ogni volta che cambio option
   cardsEl.innerHTML = '';
 
   // Condizione che specifica che se un tag non ha una card restituisce un empty state
-  if(filteredCards.length === 0){
+  if(filteredCards.length == 0){
 
     cardsEl.innerHTML = `<h2 class='empty_state'>No news available.</h2>`;
 
@@ -122,7 +122,6 @@ selectEl.addEventListener('change', function(e){
 
   }
 
-
 });
 
 
@@ -131,35 +130,50 @@ const typesList = new Set(cards.flatMap(card => card.tags));
 
 console.log(typesList);
 
+// const typesList = cards.flatMap(card => card.tags)
+// console.log(typesList);
+
+// const types = []
+// typesList.forEach(typeText => {
+//   if(!types.includes(typeText)){
+//     types.push(typeText)
+//   }
+// })
+
+// console.log(types);
 
 
 
 
 
+renderOptions(typesList, selectEl);
 
 
 
+/**
+ * Rende tutte le options nella select dinamicamente
+ * @param {Array} optionsList Una lista di stringhe
+ * @param {object} selectDomEl L'elemento DOM della select dove appendere tutte le options
+ */
+function renderOptions(optionsList, selectDomEl){
 
+  optionsList.forEach(optionValue => {
+    
+    const optionEl = document.createElement('option');
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    optionEl.value = optionValue;
+    optionEl.innerText = optionValue;
+    
+    
+    // const capitalizedName = optionValue.charAt(0).toUpperCase() + optionValue.slice(1, optionValue.length).toLowerCase();
+    
+    // optionEl.value = capitalizedName;
+    // optionEl.innerText = capitalizedName;
+    
+    selectDomEl.appendChild(optionEl);
+    
+  })
+}
 
 
 /**
