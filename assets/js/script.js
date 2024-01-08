@@ -71,6 +71,15 @@ const cards = [
 // Seleziono l'elemento della DOM dove aggiungo tutte le card e la salvo in una variabile
 const cardsEl = document.querySelector('.cards');
   
+// Seleziono l'elemento select nella DOM e la salvo in una variabile
+const selectEl = document.getElementById('tag_type');
+
+// Seleziono l'elemento checkbox nella DOM e la salvo in una variabile
+const checkboxEl = document.getElementById('news_saved');
+
+const bookmark = document.getElementById('bookmark');
+
+
 
 // Funzione che rende una lista di card dentro la DOM
 renderCards(cards, cardsEl);
@@ -80,10 +89,6 @@ renderCards(cards, cardsEl);
 // Crea l’interfaccia dei filtri utilizzando tag di input appropriati. 
 // Recupera in JavaScript i valori selezionati dall’utente da utilizzare 
 // nel codice per le logiche di filtraggio gli elementi.
-
-
-// Seleziono l'elemento select nella DOM e la salvo in una variabile
-const selectEl = document.getElementById('tag_type');
 
 
 // Aggiungo un event listener con l'evento change per la select
@@ -126,27 +131,36 @@ selectEl.addEventListener('change', function(e){
 
 
 // Ottengo l'unicità dei tipi di tag
-const typesList = new Set(cards.flatMap(card => card.tags));
+const tagsList = new Set(cards.flatMap(card => card.tags));
 
-console.log(typesList);
+// console.log(tagsList);
 
-// const typesList = cards.flatMap(card => card.tags)
-// console.log(typesList);
 
-// const types = []
-// typesList.forEach(typeText => {
-//   if(!types.includes(typeText)){
-//     types.push(typeText)
-//   }
-// })
-
-// console.log(types);
+// Funzione che restituisce le options dinamicamente
+renderOptions(tagsList, selectEl);
 
 
 
+// Step 4: bookmark
+// 1-Crea su ogni componente News un pulsante per il salvataggio della News.
+// 2-Se clicchiamo l’icona bookmark, cambiamo l’aspetto dell’icona (es. da vuota a piena) 
+//   e aggiungiamo l’id della News nell’array degli id delle news salvate.
+// 3-L’id della news è un dato “nascosto” che vorrai inserire in pagina per recuperarlo in seguito
+//   al click dell’icona bookmark. Per farlo dovresti utilizzare un data-attribute.
+// 4-In fase di stampa dell’elenco di news dovrai controllare se la news è salvata o meno 
+//   per poter dare il giusto aspetto all’icona bookmark.
 
 
-renderOptions(typesList, selectEl);
+checkboxEl.addEventListener('click', function(){
+  console.log('ciao');
+
+
+})
+
+
+
+
+
 
 
 
@@ -185,6 +199,7 @@ function generateCard(card){
     
   // Inserito data in formato italiano
   card.published = new Date(card.published).toLocaleDateString('it-IT');
+  console.log(card.published);
   
   // Ciclo map per creare bottoni ad ogni nuovo tag aggiunto
   const tagsButtons = card.tags.map(tag => 
@@ -198,12 +213,14 @@ function generateCard(card){
                           <p id="content">${card.content}</p>
                           <img src="./assets/img/${card.image.url}" alt="${card.image.alt}">
                           ${tagsButtons}
+                          <i id="bookmark-${card.id}" class="${card.bookmarked ? 'fa-solid' : 'fa-regular'} fa-bookmark bookmark"
+                          data-id="${card.id}"></i>
                       </div>`;
-                          // <i id="icon" class="fa-solid fa-bookmark"></i>
 
   return cardMarkup
   
 }
+
 
 
 /**
@@ -228,6 +245,25 @@ function renderCards(cardsList, domElement) {
     
     })
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

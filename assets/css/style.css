@@ -36,11 +36,19 @@ body{
     background-color: var(--light);
 }
 
+.card{
+    position: relative;
+}
+
 h1{
     color: var(--light);
     text-align: center;
     font-size: 70px;
     margin: 2rem;
+}
+
+h2{
+    padding-right: 3rem;
 }
 
 select{
@@ -53,6 +61,26 @@ select{
 #news_saved{
     transform: scale(2);
     margin-right: 0.5rem;
+}
+
+.bookmark{
+    font-size: 36px;
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+}
+
+#author{
+    font-weight: 700;
+    display: block;
+}
+
+#published{
+    font-size: 18px;
+}
+
+#content{
+    margin: 1rem 0;
 }
 
 img{
@@ -89,30 +117,9 @@ button{
     background-color: var(--arte);
 }
 
-#author{
-    font-weight: 700;
-    display: block;
-}
-
-#published{
-    font-size: 18px;
-}
-
-#content{
-    margin: 1rem 0;
-}
-
 .empty_state{
     color:var(--light)
 }
-
-/* #icon{
-    font-size: 36px;
-    display: inline-flex;
-    text-align: end;
-    justify-content: end;
-} */
-
 
 /* Region utility */
 
