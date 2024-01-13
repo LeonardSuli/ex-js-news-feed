@@ -58,7 +58,7 @@ select{
     margin-bottom: 1rem;
 }
 
-#news_saved{
+#checked{
     transform: scale(2);
     margin-right: 0.5rem;
 }
