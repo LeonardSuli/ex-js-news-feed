@@ -155,10 +155,22 @@ checkEl.addEventListener('change', function(e){
 
 
 
-
-
   // console.log(e.target.checked);
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -217,7 +229,8 @@ function generateCard(card){
   // console.log(id, title, content, tags, author, published, image);
     
   // Inserito data in formato italiano
-  card.published = new Date(published).toLocaleDateString('it-IT');
+  // card.published = new Date(published).toLocaleDateString('it-IT');
+  const data = card.published.split('-').reverse().join('/');
   // console.log(card.published);
   
   // Ciclo map per creare bottoni ad ogni nuovo tag aggiunto
@@ -229,7 +242,7 @@ function generateCard(card){
     const cardMarkup = `<div class="card">
                             <h2>${title}</h2>
                             <span id="author">pubblicato da ${author}</span>
-                            <span id="published">in data ${card.published}</span>
+                            <span id="published">in data ${data}</span>
                             <p id="content">${content}</p>
                             <img src="./assets/img/${image.url}" alt="${image.alt}">
                             ${tagsButtons}
