@@ -63,12 +63,20 @@ select{
     margin-right: 0.5rem;
 }
 
-.bookmark{
+.fa-bookmark{
     font-size: 36px;
     position: absolute;
     top: 1.5rem;
     right: 1.5rem;
 }
+
+/* .bookmarked{
+    background-color: red;
+}
+
+#bookmarked{
+    background-color: red;
+} */
 
 #author{
     font-weight: 700;

@@ -67,9 +67,8 @@ const cards = [
 // console.log(cards);
 
 // Card bookmarkate
-const bookmarked = [1];
-console.log(bookmarked);   
-  
+const bookmarked = [1];  
+console.log(bookmarked);
   
 // Step 2 - Stampa dei dati in pagina
 // Prendendo come riferimento il layout di esempio presente nell'HTML 
@@ -83,9 +82,8 @@ const cardsEl = document.querySelector('.cards');
 const selectEl = document.getElementById('tag_type');
 
 // Seleziono l'elemento checkbox nella DOM e la salvo in una variabile
-const checkboxEl = document.getElementById('news_saved');
+const checkEl = document.getElementById('checked');
 
-const bookmark = document.getElementById('bookmark');
 
 
 
@@ -141,9 +139,6 @@ selectEl.addEventListener('change', function(e){
 });
 
 
-
-
-
 // Ottengo l'unicità dei tipi di tag
 const tagsList = new Set(cards.flatMap(card => card.tags));
 
@@ -152,6 +147,18 @@ const tagsList = new Set(cards.flatMap(card => card.tags));
 
 // Funzione che restituisce le options dinamicamente
 renderOptions(tagsList, selectEl);
+
+
+// Aggiungo un event listener con l'evento change per la checkbox
+checkEl.addEventListener('change', function(e){
+
+
+
+
+
+
+  // console.log(e.target.checked);
+})
 
 
 
@@ -211,44 +218,81 @@ function generateCard(card){
     
   // Inserito data in formato italiano
   card.published = new Date(published).toLocaleDateString('it-IT');
-  console.log(card.published);
+  // console.log(card.published);
   
   // Ciclo map per creare bottoni ad ogni nuovo tag aggiunto
   const tagsButtons = tags.map(tag => 
     `<button class="btn_${tag}">${tag}</button>`).join('');
 
-    console.log(isBookmarked(card));         
-    
     
     // Creato markup della card in HTML con il template literal
-    const cardMarkup = `<div class="card ${isBookmarked(card) ? 'bookmarked' : ''}">
-    <h2>${title}</h2>
-    <span id="author">pubblicato da ${author}</span>
-    <span id="published">in data ${card.published}</span>
-    <p id="content">${content}</p>
-    <img src="./assets/img/${image.url}" alt="${image.alt}">
-    ${tagsButtons}
-    <div>
-    <i id="bookmark-${id}" class="fa-${isBookmarked(card) ? 'solid' : 'regular'} fa-bookmark bookmark" data-id="${id}"></i>
-    </div>
-    </div>`;
+    const cardMarkup = `<div class="card">
+                            <h2>${title}</h2>
+                            <span id="author">pubblicato da ${author}</span>
+                            <span id="published">in data ${card.published}</span>
+                            <p id="content">${content}</p>
+                            <img src="./assets/img/${image.url}" alt="${image.alt}">
+                            ${tagsButtons}
+                            <div>
+                                <i class="fa-${isBookmarked(card) ? 'solid' : 'regular'} fa-bookmark ${isBookmarked(card) ? 'bookmarked' : '' }" data-id="${id}"></i>
+                            </div>
+                        </div>`;
     
-    console.log(cardMarkup);
-    
+
+                        console.log(isBookmarked(card));
+
+                        // console.log(cardMarkup)
+
     return cardMarkup                                         
-  }
+};
 
 
 
 
 
+// Bookmark
+const iconsEl = document.querySelectorAll('.card i');
+console.log(iconsEl);
 
-  // Funzione per sapere se l'elemento è bookmarkato o meno
-  function isBookmarked(card){
-    return bookmarked.includes(card.id)
-  }
-  
-  
+
+iconsEl.forEach(card => {
+  console.log(card);
+
+  card.addEventListener('click', handleCardClicks)
+
+})
+
+// Funzione per selezionare il bookmark
+function handleCardClicks(e){
+    console.log(e.target.getAttribute('data-id'));
+
+    const iconId = Number(e.target.getAttribute('data-id'))
+
+    bookmarked.push(iconId)
+
+    console.log(bookmarked);
+
+    e.target.className = `fa-solid fa-bookmark bookmarked`
+
+
+};
+
+
+
+
+// Funzione per sapere se l'elemento è bookmarkato o meno
+/**
+ * 
+ * @param {Object} card 
+ * @returns {Boolean}
+ */
+function isBookmarked(card){
+  return bookmarked.includes(card.id)
+}
+
+
+
+
 
 
 
