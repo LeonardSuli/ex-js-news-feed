@@ -148,21 +148,33 @@ renderOptions(tagsList, selectEl);
 // Aggiungo un event listener con l'evento change per la checkbox
 checkEl.addEventListener('change', function(e){
 
+  if(!e.target.checked){
 
-  joinCards = filteredCards.filter(value => checkedCards.includes(value))
+    checkedCards = cards
+
+    manageCardRendering(filteredCards)
+
+    return
+  }
+
+
+  checkedCards = cards.filter(card => {
+
+    return bookmarked.includes(card.id)
+
+  })
+
+
+  joinCards = checkedCards.filter(value => filteredCards.includes(value))
 
 
   manageCardRendering(joinCards)
-  
-
-
-
 
   // console.log(e.target.checked);
 })
 
 
-// funzione per gestire l'esecuzione delle cards della select e checkbox
+// Funzione per gestire l'esecuzione delle cards della select e checkbox
 function manageCardRendering(cards){
 
   // Resetto la select ogni volta che cambio option
@@ -283,17 +295,7 @@ function generateCard(card){
 
 
 
-// Bookmark
-const iconsEl = document.querySelectorAll('.card i');
-console.log(iconsEl);
 
-
-iconsEl.forEach(card => {
-  console.log(card);
-
-  card.addEventListener('click', handleCardClicks)
-
-})
 
 // Funzione per selezionare il bookmark
 function handleCardClicks(e){
@@ -352,6 +354,19 @@ function renderCards(cardsList, domElement) {
     domElement.insertAdjacentHTML("beforeend", cardEl); 
     
   })
+
+  // Bookmark
+  const iconsEl = document.querySelectorAll('.card i');
+  console.log(iconsEl);
+
+
+  iconsEl.forEach(card => {
+    console.log(card);
+
+    card.addEventListener('click', handleCardClicks)
+
+  })
+
 }
 
 
