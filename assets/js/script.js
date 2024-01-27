@@ -69,6 +69,10 @@ const cards = [
 // Card bookmarkate
 const bookmarked = [1];  
 console.log(bookmarked);
+
+let filteredCards = cards;
+
+let checkedCards = cards;
   
 // Step 2 - Stampa dei dati in pagina
 // Prendendo come riferimento il layout di esempio presente nell'HTML 
@@ -120,21 +124,13 @@ selectEl.addEventListener('change', function(e){
   });
 
   // console.log(filteredCards);
+  
+  joinCards = filteredCards.filter(value => checkedCards.includes(value))
 
-  // Resetto la select ogni volta che cambio option
-  cardsEl.innerHTML = '';
 
-  // Condizione che specifica che se un tag non ha una card restituisce un empty state
-  if(filteredCards.length == 0){
+  manageCardRendering(joinCards)
 
-    cardsEl.innerHTML = `<h2 class='empty_state'>No news available.</h2>`;
-
-  }else{
-
-    // Altrimenti restituisce la card richista
-    renderCards(filteredCards, cardsEl);
-
-  }
+  
 
 });
 
@@ -153,14 +149,38 @@ renderOptions(tagsList, selectEl);
 checkEl.addEventListener('change', function(e){
 
 
+  joinCards = filteredCards.filter(value => checkedCards.includes(value))
+
+
+  manageCardRendering(joinCards)
+  
+
+
 
 
   // console.log(e.target.checked);
 })
 
 
+// funzione per gestire l'esecuzione delle cards della select e checkbox
+function manageCardRendering(cards){
 
+  // Resetto la select ogni volta che cambio option
+  cardsEl.innerHTML = '';
 
+  // Condizione che specifica che se un tag non ha una card restituisce un empty state
+  if(cards.length == 0){
+
+    cardsEl.innerHTML = `<h2 class='empty_state'>No news available.</h2>`;
+
+  }else{
+
+    // Altrimenti restituisce la card richista
+    renderCards(cards, cardsEl);
+
+  }
+  
+}
 
 
 
@@ -230,7 +250,7 @@ function generateCard(card){
     
   // Inserito data in formato italiano
   // card.published = new Date(published).toLocaleDateString('it-IT');
-  const data = card.published.split('-').reverse().join('/');
+  const date = card.published.split('-').reverse().join('/');
   // console.log(card.published);
   
   // Ciclo map per creare bottoni ad ogni nuovo tag aggiunto
@@ -242,7 +262,7 @@ function generateCard(card){
     const cardMarkup = `<div class="card">
                             <h2>${title}</h2>
                             <span id="author">pubblicato da ${author}</span>
-                            <span id="published">in data ${data}</span>
+                            <span id="published">in data ${date}</span>
                             <p id="content">${content}</p>
                             <img src="./assets/img/${image.url}" alt="${image.alt}">
                             ${tagsButtons}
@@ -331,7 +351,7 @@ function renderCards(cardsList, domElement) {
     // Aggiungo il markup HTML al container delle carte nel DOM
     domElement.insertAdjacentHTML("beforeend", cardEl); 
     
-    })
+  })
 }
 
 
